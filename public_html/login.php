@@ -1,4 +1,10 @@
-<!-- public_html/login.php -->
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    header('Location: /entries.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -8,16 +14,11 @@
 </head>
 <body>
   <h1>Kullanıcı Girişi</h1>
-  <?php if (isset($_GET['registered'])): ?>
-    <p style="color:green;">Kayıt başarılı. Giriş yapabilirsiniz.</p>
-  <?php endif; ?>
   <form action="backend/user/login_process.php" method="post">
-    <label>
-      Kullanıcı Adı:<br>
+    <label>Kullanıcı Adı:<br>
       <input type="text" name="username" required>
     </label><br><br>
-    <label>
-      Şifre:<br>
+    <label>Şifre:<br>
       <input type="password" name="password" required>
     </label><br><br>
     <button type="submit">Giriş Yap</button>
