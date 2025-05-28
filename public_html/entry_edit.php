@@ -18,8 +18,8 @@ $e = $stmt->fetch() ?: exit('Girdi bulunamadı veya yetkiniz yok.');
   <title>Girdi Düzenle | <?= htmlspecialchars($e['title']) ?></title>
   <link rel="stylesheet" href="/css/style.css">
   <!-- TinyMCE CDN (kendi API anahtarınla) -->
-  <script src="https://cdn.tiny.cloud/1/dqtm8ijktg9lk7ltdz12cf2p4d7irvitd1cz6kkcs5e3qb6o/tinymce/5/tinymce.min.js"
-          referrerpolicy="origin"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.3/tinymce.min.js"></script>
+
   <script>
     tinymce.init({
       selector: 'textarea[name=content]',
