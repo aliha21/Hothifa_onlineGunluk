@@ -59,7 +59,7 @@ $entries = $stmt->fetchAll();
         <?php else: ?>
           <a href="backend/entry/toggle_fav.php?id=<?= $e['id'] ?>&action=add">☆ Ekle</a>
         <?php endif; ?>
-          <a href="entry_view.php?id=<?= $e['id'] ?>">Görüntüle</a>
+          | <a href="entry_view.php?id=<?= $e['id'] ?>">Görüntüle</a>
       </li>
       <?php endforeach; ?>
     </ul>
