@@ -100,3 +100,33 @@ li a {
 body.page-favorites h1 {
   background-color: #f5a623;
 }
+
+
+/* Hata sayfası */
+.error-box {
+  max-width: 400px;
+  margin: 4rem auto;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid #e74c3c;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.error-box p {
+  color: #e74c3c;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.error-box .btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #4a90e2;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+}
+.error-box .btn:hover {
+  background: #3b7dc1;
+}
