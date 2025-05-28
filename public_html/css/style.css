@@ -1,0 +1,102 @@
+/* css/style.css */
+/* Genel ayarlar */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Başlık stili */
+h1 {
+  background-color: #4a90e2;
+  color: #fff;
+  margin: 0;
+  padding: 1rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+/* Linkler ve navigasyon */
+a {
+  color: #4a90e2;
+  text-decoration: none;
+  font-weight: 500;
+}
+a:hover {
+  text-decoration: underline;
+}
+p > a {
+  margin-right: 1rem;
+}
+
+/* Form elemanları */
+form {
+  width: 90%;
+  max-width: 500px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+input[type="text"],
+input[type="password"],
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+textarea {
+  resize: vertical;
+}
+button {
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+button:hover {
+  background-color: #3b7dc1;
+}
+
+/* Liste stili */
+ul {
+  list-style: none;
+  padding: 0;
+  width: 90%;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+li {
+  background: #fff;
+  margin-bottom: 0.75rem;
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+li strong {
+  font-size: 1.1rem;
+}
+li small {
+  color: #666;
+}
+li a {
+  margin-right: 0.75rem;
+}
+
+/* Favoriler başlığı */
+body.page-favorites h1 {
+  background-color: #f5a623;
+}
