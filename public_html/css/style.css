@@ -1,132 +1,426 @@
-/* css/style.css */
-/* Genel ayarlar */
+/* Genel açılış */
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
+  font-family: sans-serif;
+  background: #f5f5f5;
   margin: 0;
+}
+h1 {
+  background: #4a90e2;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+  margin: 0;
+}
+
+/* Navigasyon altı */
+.nav {
+  text-align: center;
+  padding: .75rem;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.nav a { margin: 0 .5rem; }
+
+/* Arama formu */
+.search-form {
+  display: flex;
+  max-width: 800px;
+  margin: 1rem auto;
+}
+.search-form input {
+  flex: 1;
+  padding: .5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+}
+.search-form button {
+  padding: .5rem 1rem;
+  border: none;
+  background: #4a90e2;
+  color: #fff;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Kart Listesi */
+.entries-list {
+  list-style: none;
+  max-width: 800px;
+  margin: 1rem auto;
   padding: 0;
 }
-
-/* Başlık stili */
-h1 {
-  background-color: #4a90e2;
-  color: #fff;
-  margin: 0;
+.entries-list li {
+  display: flex;
+  background: #fff;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.entries-list img.thumb {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.entries-list .info {
   padding: 1rem;
-  font-size: 2rem;
-  text-align: center;
+  flex: 1;
+}
+.entries-list .meta {
+  color: #666;
+  font-size: .9rem;
+}
+.entries-list .title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: .5rem 0;
+}
+.tag {
+  display: inline-block;
+  background: #e0e0e0;
+  padding: .2rem .5rem;
+  margin-right: .5rem;
+  font-size: .85rem;
+}
+.actions a {
+  color: #4a90e2;
+  text-decoration: none;
+  margin-right: .75rem;
+}
+.actions a:hover {
+  text-decoration: underline;
 }
 
-/* Linkler ve navigasyon */
-a {
+/* Responsive */
+@media (max-width: 600px) {
+  .entries-list li {
+    flex-direction: column;
+  }
+  .entries-list img.thumb {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.empty {
+  text-align: center;
+  color: #555;
+  margin: 2rem 0;
+}
+
+/* Ortak başlık ve nav */
+header.container {
+  max-width: 900px;
+  margin: 2rem auto 1rem;
+  padding: 0;
+}
+header.container h1 {
+  background: #4a90e2;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  margin: 0;
+  font-size: 2rem;
+}
+nav.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0.75rem 0 2rem;
+}
+nav.nav-links a {
   color: #4a90e2;
   text-decoration: none;
   font-weight: 500;
 }
-a:hover {
+nav.nav-links a:hover {
   text-decoration: underline;
 }
-p > a {
-  margin-right: 1rem;
-}
 
-/* Form elemanları */
-form {
-  width: 90%;
-  max-width: 500px;
-  margin: 2rem auto;
+
+/* ─────────────────────────────────────────────────── */
+/*  Profil Sayfası Kart Stili                         */
+/* ─────────────────────────────────────────────────── */
+.profile-card {
   background: #fff;
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: center;
 }
-label {
-  display: block;
+.profile-card img.profile-photo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ccc;
   margin-bottom: 1rem;
-  font-weight: 600;
 }
-input[type="text"],
-input[type="password"],
-textarea {
+.profile-card h2 {
+  margin: 0.5rem 0 1rem;
+  font-size: 1.5rem;
+}
+.profile-card .field {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+.profile-card .field label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.profile-card .field span {
+  color: #555;
+}
+
+/* ─────────────────────────────────────────────────── */
+/*  Profil Nav (header ile uyumlu)                    */
+/* ─────────────────────────────────────────────────── */
+header.profile-header {
+  max-width: 900px;
+  margin: 2rem auto 1rem;
+  padding: 0;
+}
+header.profile-header h1 {
+  background: #4a90e2;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  margin: 0;
+  font-size: 2rem;
+}
+nav.profile-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0.75rem 0 2rem;
+}
+nav.profile-nav a {
+  color: #4a90e2;
+  text-decoration: none;
+  font-weight: 500;
+}
+nav.profile-nav a:hover {
+  text-decoration: underline;
+}
+
+/* ─────────────────────────────────────────────────── */
+/* Profil Düzenleme Kartı                             */
+/* ─────────────────────────────────────────────────── */
+.profile-edit-form {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin: 2rem auto;
+  max-width: 600px;
+}
+.profile-edit-form .field {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.profile-edit-form .field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.profile-edit-form .field input {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
-textarea {
-  resize: vertical;
+.profile-edit-form .buttons {
+  text-align: right;
+  margin-top: 1.5rem;
 }
-button {
-  background-color: #4a90e2;
-  color: #fff;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-button:hover {
-  background-color: #3b7dc1;
-}
-
-/* Liste stili */
-ul {
-  list-style: none;
-  padding: 0;
-  width: 90%;
-  max-width: 600px;
-  margin: 2rem auto;
-}
-li {
-  background: #fff;
-  margin-bottom: 0.75rem;
-  padding: 1rem;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-li strong {
-  font-size: 1.1rem;
-}
-li small {
-  color: #666;
-}
-li a {
-  margin-right: 0.75rem;
-}
-
-/* Favoriler başlığı */
-body.page-favorites h1 {
-  background-color: #f5a623;
-}
-
-
-/* Hata sayfası */
-.error-box {
-  max-width: 400px;
-  margin: 4rem auto;
-  padding: 1.5rem;
-  background: #fff;
-  border: 1px solid #e74c3c;
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-.error-box p {
-  color: #e74c3c;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-.error-box .btn {
+.profile-edit-form .buttons button,
+.profile-edit-form .buttons a {
   display: inline-block;
   padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+.profile-edit-form .buttons button {
   background: #4a90e2;
   color: #fff;
-  border-radius: 4px;
+  border: none;
+}
+.profile-edit-form .buttons button:hover {
+  background: #3b7dc1;
+}
+.profile-edit-form .buttons a {
+  background: #ccc;
+  color: #333;
+  margin-left: 0.5rem;
+}
+.profile-edit-form .buttons a:hover {
+  background: #aaa;
+}
+
+/* ─────────────────────────────────────────────────── */
+/* Profil Header/Nav (entries & favorites’la uyumlu)  */
+/* ─────────────────────────────────────────────────── */
+header.profile-header {
+  max-width: 900px;
+  margin: 2rem auto 0;
+  padding: 0 1rem;
+}
+header.profile-header h1 {
+  background: #4a90e2;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  margin: 0;
+  font-size: 2rem;
+}
+nav.profile-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0.75rem 0 0;
+}
+nav.profile-nav a {
+  color: #4a90e2;
   text-decoration: none;
   font-weight: 500;
 }
-.error-box .btn:hover {
+nav.profile-nav a:hover {
+  text-decoration: underline;
+}
+
+
+/* ─────────────────────────────────────────────────── */
+/*  Girdi Oluşturma Kartı                             */
+/* ─────────────────────────────────────────────────── */
+.entry-form {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin: 2rem auto;
+  max-width: 700px;
+}
+.entry-form .field {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.entry-form .field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.entry-form .field input[type="text"],
+.entry-form .field input[type="file"],
+.entry-form .field textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.entry-form textarea {
+  height: 200px;
+  resize: vertical;
+}
+.entry-form .buttons {
+  text-align: right;
+  margin-top: 1.5rem;
+}
+.entry-form .buttons button,
+.entry-form .buttons a {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+.entry-form .buttons button {
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+}
+.entry-form .buttons button:hover {
   background: #3b7dc1;
+}
+.entry-form .buttons a {
+  background: #ccc;
+  color: #333;
+  margin-left: 0.5rem;
+}
+.entry-form .buttons a:hover {
+  background: #aaa;
+}
+
+/* entry-view.css (veya head içindeki <style>) */
+.entry-view {
+  display: flex;
+  gap: 1rem;
+  background: #fff;
+  padding: 1rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.entry-images {
+  flex-shrink: 0;
+  width: 200px;
+}
+.entry-images img {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  object-fit: cover;
+}
+.entry-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.entry-info .meta {
+  color: #666;
+  font-size: .9rem;
+  margin-bottom: .5rem;
+}
+.entry-info .tags {
+  margin: .5rem 0;
+}
+.entry-info .tags .tag {
+  display: inline-block;
+  background: #e0e0e0;
+  border-radius: 4px;
+  padding: .2rem .5rem;
+  margin-right: .5rem;
+  font-size: .85rem;
+}
+.entry-info .entry-content {
+  flex: 1;
+  line-height: 1.6;
+  margin-top: .5rem;
+}
+.entry-actions {
+  margin-top: 1rem;
+}
+.entry-actions a {
+  margin-right: 1rem;
+  color: #4a90e2;
+  text-decoration: none;
+}
+.entry-actions a:hover {
+  text-decoration: underline;
+}
+@media (max-width: 600px) {
+  .entry-view { flex-direction: column; }
+  .entry-images { width: 100%; }
 }

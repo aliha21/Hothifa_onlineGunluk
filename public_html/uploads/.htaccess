@@ -1,0 +1,4 @@
+# uploads/ dizininde PHP, ASP, JSP vb. betiklerin çalıştırılmasını engelle
+<FilesMatch "\.(php|pl|py|jsp|asp)$">
+  Deny from all
+</FilesMatch>

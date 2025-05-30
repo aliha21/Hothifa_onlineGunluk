@@ -1,0 +1,10 @@
+2025-05-30T05:33:42-04:00 POST=Array
+(
+    [username] => gjhg
+    [full_name] => jgj
+    [email] => 
+    [password] => jmgmmj
+    [password_confirm] => 34654
+)
+
+ username=gjhg exists=0

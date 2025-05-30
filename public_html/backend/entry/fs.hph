@@ -1,0 +1,99 @@
+<?php
+// public_html/backend/entry/edit_process.php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: /login.php');
+    exit;
+}
+require __DIR__ . '/../db.php';
+
+$id        = intval($_POST['id']      ?? 0);
+$title     = trim($_POST['title']    ?? '');
+$content   = trim($_POST['content']  ?? '');
+$tagString = trim($_POST['tags']     ?? '');
+
+if (!$id || $title === '' || $content === '') {
+    exit('Eksik veri. Lütfen başlık, içerik ve ID bilgilerini kontrol edin.');
+}
+
+try {
+    // 1) entries tablosunu güncelle
+    $sql = "UPDATE entries
+            SET title   = :t,
+                content = :c
+            WHERE id = :id
+              AND user_id = :u";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        't'  => $title,
+        'c'  => $content,
+        'id' => $id,
+        'u'  => $_SESSION['user_id']
+    ]);
+
+    // 2) etiket pivotlarını temizle + yeniden ekle
+    $pdo->prepare("DELETE FROM entry_tags WHERE entry_id = ?")
+        ->execute([$id]);
+    if ($tagString !== '') {
+        $tags = array_unique(array_map('trim', explode(',', $tagString)));
+        foreach ($tags as $tag) {
+            if ($tag === '') continue;
+            $stmtT = $pdo->prepare(
+                "INSERT INTO tags (name)
+                 VALUES (:n)
+                 ON DUPLICATE KEY UPDATE id = LAST_INSERT_ID(id)"
+            );
+            $stmtT->execute(['n' => $tag]);
+            $tagId = $pdo->lastInsertId();
+            $pdo->prepare(
+                "INSERT IGNORE INTO entry_tags (entry_id, tag_id)
+                 VALUES (:e, :t)"
+            )->execute(['e' => $id, 't' => $tagId]);
+        }
+    }
+
+    // 3) eski resimleri sil (checkbox’la işaretlenenler)
+    if (!empty($_POST['delete_images'])) {
+        $delIds = array_map('intval', (array)$_POST['delete_images']);
+        // önce dosyaları sil
+        $in  = implode(',', $delIds);
+        $files = $pdo
+          ->query("SELECT filename FROM entry_images WHERE id IN ($in)")
+          ->fetchAll(PDO::FETCH_COLUMN);
+        foreach ($files as $f) {
+            @unlink(__DIR__ . '/../../uploads/' . $f);
+        }
+        // sonra DB’den temizle
+        $pdo->exec("DELETE FROM entry_images WHERE id IN ($in)");
+    }
+
+    // 4) yeni resimleri ekle
+    if (!empty($_FILES['new_images'])
+        && is_array($_FILES['new_images']['tmp_name'])
+    ) {
+        foreach ($_FILES['new_images']['tmp_name'] as $i => $tmp) {
+            if ($tmp && is_uploaded_file($tmp)) {
+                $name = time() . '_' . basename($_FILES['new_images']['name'][$i]);
+                move_uploaded_file(
+                  $tmp,
+                  __DIR__ . '/../../uploads/' . $name
+                );
+                $pdo->prepare(
+                  "INSERT INTO entry_images (entry_id, filename)
+                   VALUES (?,?)"
+                )->execute([$id, $name]);
+            }
+        }
+    }
+
+    // 5) tamam, listeye dön
+    header('Location: /entries.php');
+    exit;
+
+} catch (PDOException $ex) {
+    error_log($ex->getMessage());
+    exit('Güncelleme yapılamadı. Lütfen tekrar deneyin.');
+}
